@@ -36,6 +36,8 @@ namespace Simulator.Web
         public static string SessionGUID;
         public static string SimID;
 
+        public static bool RunLocal = false;
+
         public static bool Headless = false;
 
         public static bool RetryForever = false;
@@ -744,6 +746,7 @@ namespace Simulator.Web
         {
             public bool headless { get; set; } = Config.Headless;
             public bool read_only { get; set; } = false;
+            public bool run_local { get; set; } = Config.RunLocal;
             public string api_hostname { get; set; } = Config.ApiHost;
             public int api_port { get; set; } = Config.ApiPort;
             public string cloud_url { get; set; } = Config.CloudUrl;
@@ -777,7 +780,8 @@ namespace Simulator.Web
                 data_path = PersistentDataPath,
                 cloud_url = CloudUrl,
                 cloud_proxy = CloudProxy,
-                headless = Headless
+                headless = Headless,
+                run_local = RunLocal
             };
         }
 
@@ -816,6 +820,8 @@ namespace Simulator.Web
             }
 
             Headless = config.headless;
+
+            RunLocal = config.run_local ?? false;
         }
 
         private static void ParseCommandLine()
@@ -874,6 +880,9 @@ namespace Simulator.Web
                         break;
                     case "--retryForever":
                         RetryForever = true;
+                        break;
+                    case "--runLocal":
+                        RunLocal = true;
                         break;
                     default:
                         // skip unknown arguments to allow to pass default Unity Player args
