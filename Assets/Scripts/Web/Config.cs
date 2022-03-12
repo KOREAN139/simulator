@@ -821,7 +821,7 @@ namespace Simulator.Web
 
             Headless = config.headless;
 
-            RunLocal = config.run_local ?? false;
+            RunLocal = config.run_local;
         }
 
         private static void ParseCommandLine()
