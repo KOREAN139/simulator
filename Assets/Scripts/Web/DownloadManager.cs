@@ -267,6 +267,19 @@ namespace Simulator.Web
                 client.DownloadFileCompleted += download.Completed;
                 cancelled = false;
                 await client.DownloadFileTaskAsync(download.uri, download.path);
+
+                if (download.uri.ToString().StartsWith("https://wise.svlsimulator.com"))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(""));
+                        File.Copy("", "", true);
+                    }
+                    catch (IOException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
             }
             catch (Exception ex)
             {
